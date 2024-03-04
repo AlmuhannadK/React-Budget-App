@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+
+import "./App.css";
+import { MyComponent } from "./MyComponent";
 
 function App() {
+  let title = "Learning React Library";
+
+  const fixedList = ["hello", "SDA", "Bootcamp"];
+
+  const handleClick = () => {
+    title = "Pressed the button";
+    console.log(title);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1 className="testing"> {title}</h1>
+      <input type="text" />
+      <button className="btn-test" onClick={handleClick}>
+        Click
+      </button>
+      <ul>
+        <MyComponent />
+      </ul>
     </div>
   );
 }
