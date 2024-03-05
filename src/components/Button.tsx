@@ -1,3 +1,3 @@
 export function Button({ label }) {
-  return <button className="btn third">{label}</button>;
+  return <button className="btn">{label}</button>;
 }
