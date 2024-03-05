@@ -1,8 +1,7 @@
 import React from "react";
-
+import logo from "./logo.svg";
 import "./App.css";
-import { MyComponent } from "./MyComponent";
-
+import { IncomeForm } from "./components/IncomeForm";
 function App() {
   let title = "Learning React Library";
 
@@ -14,15 +13,9 @@ function App() {
   };
 
   return (
-    <div className="container">
-      <h1 className="testing"> {title}</h1>
-      <input type="text" />
-      <button className="btn-test" onClick={handleClick}>
-        Click
-      </button>
-      <ul>
-        <MyComponent />
-      </ul>
+    <div className="App">
+      <h1>Budget App</h1>
+      <IncomeForm />
     </div>
   );
 }
