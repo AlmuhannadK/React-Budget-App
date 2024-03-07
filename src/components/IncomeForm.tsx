@@ -1,4 +1,7 @@
-import { Button } from "./Button";
+import { Label } from "@mui/icons-material";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import { DateTimePicker } from "@mui/x-date-pickers/DatePicker";
 
 export function IncomeForm({
   handleChangeIncomeSource,
@@ -9,22 +12,20 @@ export function IncomeForm({
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="incomeSource">Income Source</label>
-        <input
-          type="text"
+        <TextField
+          id="filled-basic"
+          label="Income Source"
+          variant="filled"
           name="incomeSource"
-          id="incomeSource"
-          placeholder="source of income"
           onChange={handleChangeIncomeSource}
         />
       </div>
       <div>
-        <label htmlFor="incomeAmount">Income Amount</label>
-        <input
-          type="text"
+        <TextField
+          id="filled-basic"
+          label="Income Amount"
+          variant="filled"
           name="incomeAmount"
-          id="incomeAmount"
-          placeholder="amount of income"
           onChange={handleChangeIncomeAmount}
         />
       </div>
@@ -38,7 +39,9 @@ export function IncomeForm({
           onChange={handleChangeIncomeDate}
         />
       </div>
-      <Button label="PAY" />
+      <Button variant="contained" color="success" type="submit">
+        Add income
+      </Button>
     </form>
   );
 }
