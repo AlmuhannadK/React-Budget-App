@@ -1,8 +1,10 @@
 import { Button } from "./Button";
 
-export function IncomeForm({ handleChangeIncomeSource, handleSubmit }) {
-  // manage state here
-
+export function IncomeForm({
+  handleChangeIncomeSource,
+  handleChangeIncomeAmount,
+  handleSubmit,
+}) {
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -22,6 +24,7 @@ export function IncomeForm({ handleChangeIncomeSource, handleSubmit }) {
           name="incomeAmount"
           id="incomeAmount"
           placeholder="amount of income"
+          onChange={handleChangeIncomeAmount}
         />
       </div>
       <div>
