@@ -3,6 +3,7 @@ import { Button } from "./Button";
 export function IncomeForm({
   handleChangeIncomeSource,
   handleChangeIncomeAmount,
+  handleChangeIncomeDate,
   handleSubmit,
 }) {
   return (
@@ -29,7 +30,13 @@ export function IncomeForm({
       </div>
       <div>
         <label htmlFor="incomeDate">Income Date</label>
-        <input type="date" name="incomeDate" id="incomeDate" title="date" />
+        <input
+          type="date"
+          name="incomeDate"
+          id="incomeDate"
+          title="date"
+          onChange={handleChangeIncomeDate}
+        />
       </div>
       <Button label="PAY" />
     </form>

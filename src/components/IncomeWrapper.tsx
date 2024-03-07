@@ -3,6 +3,7 @@ import { IncomeForm } from "./IncomeForm";
 
 export function IncomeWrapper() {
   type Income = {
+    id: number;
     source: string;
     amount: number;
     date: string;
@@ -10,7 +11,7 @@ export function IncomeWrapper() {
   const [incomes, setIncomes] = useState<Income[]>([]);
   const [source, setSource] = useState("");
   const [amount, setAmount] = useState(0);
-  //const [date, setDate] = useState(null);
+  const [date, setDate] = useState(null);
 
   const handleChangeIncomeSource = (e) => {
     const value = e.target.value;
@@ -20,13 +21,18 @@ export function IncomeWrapper() {
     const value = e.target.value;
     setAmount(value);
   };
+  const handleChangeIncomeDate = (e) => {
+    const value = e.target.value;
+    setDate(value);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("SUBMITTED FORM ...");
     const newIncome = {
+      id: Number(new Date()),
       source: source,
       amount: amount,
-      date: new Date().toLocaleDateString(),
+      date: date,
     };
     setIncomes([...incomes, newIncome]);
     console.log(newIncome);
@@ -37,12 +43,13 @@ export function IncomeWrapper() {
       <IncomeForm
         handleChangeIncomeSource={handleChangeIncomeSource}
         handleChangeIncomeAmount={handleChangeIncomeAmount}
+        handleChangeIncomeDate={handleChangeIncomeDate}
         handleSubmit={handleSubmit}
       />
       <ul>
         {incomes.map((income) => {
           return (
-            <li>
+            <li key={income.id}>
               <p>{income.source}</p>
               <p>{income.amount}</p>
               <p>{income.date}</p>
