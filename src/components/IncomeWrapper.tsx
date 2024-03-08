@@ -8,31 +8,37 @@ export function IncomeWrapper() {
     amount: number;
     date: string;
   };
-  const [incomes, setIncomes] = useState<Income[]>([]);
-  const [source, setSource] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [date, setDate] = useState(null);
 
-  const handleChangeIncomeSource = (e) => {
-    const value = e.target.value;
-    setSource(value);
+  // states
+  const [incomes, setIncomes] = useState<Income[]>([]);
+  const [income, setIncome] = useState({
+    source: "",
+    amount: 0,
+    date: new Date().toLocaleDateString(),
+  });
+
+  const handleChange = (e) => {
+    const { value, name } = e.target; //destructuring (take name and value form target)
+    setIncome({
+      ...income,
+      [name]: value, //dynamically assign value to name of field
+    });
   };
-  const handleChangeIncomeAmount = (e) => {
-    const value = e.target.value;
-    setAmount(value);
+
+  const handleChangeDate = (value) => {
+    setIncome({
+      ...income,
+      date: new Date(value.$d).toLocaleDateString(),
+    });
   };
-  const handleChangeIncomeDate = (e) => {
-    const value = e.target.value;
-    setDate(value);
-  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("SUBMITTED FORM ...");
     const newIncome = {
       id: Number(new Date()),
-      source: source,
-      amount: amount,
-      date: date,
+      source: income.source,
+      amount: income.amount,
+      date: income.date,
     };
     setIncomes([...incomes, newIncome]);
     console.log(newIncome);
@@ -41,9 +47,8 @@ export function IncomeWrapper() {
   return (
     <>
       <IncomeForm
-        handleChangeIncomeSource={handleChangeIncomeSource}
-        handleChangeIncomeAmount={handleChangeIncomeAmount}
-        handleChangeIncomeDate={handleChangeIncomeDate}
+        handleChange={handleChange}
+        handleChangeDate={handleChangeDate}
         handleSubmit={handleSubmit}
       />
       <ul>

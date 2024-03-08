@@ -3,8 +3,8 @@ import "./App.css";
 import { IncomeWrapper } from "./components/IncomeWrapper";
 function App() {
   return (
-    <div className="App">
-      <h1>Budget App</h1>
+    <div>
+      <h1>React - Budget App</h1>
       <IncomeWrapper />
     </div>
   );

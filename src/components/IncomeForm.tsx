@@ -1,47 +1,48 @@
 import { Label } from "@mui/icons-material";
+import { Grid, colors } from "@mui/material";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { DateTimePicker } from "@mui/x-date-pickers/DatePicker";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
-export function IncomeForm({
-  handleChangeIncomeSource,
-  handleChangeIncomeAmount,
-  handleChangeIncomeDate,
-  handleSubmit,
-}) {
+export function IncomeForm({ handleChange, handleChangeDate, handleSubmit }) {
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <TextField
-          id="filled-basic"
-          label="Income Source"
-          variant="filled"
-          name="incomeSource"
-          onChange={handleChangeIncomeSource}
-        />
-      </div>
-      <div>
-        <TextField
-          id="filled-basic"
-          label="Income Amount"
-          variant="filled"
-          name="incomeAmount"
-          onChange={handleChangeIncomeAmount}
-        />
-      </div>
-      <div>
-        <label htmlFor="incomeDate">Income Date</label>
-        <input
-          type="date"
-          name="incomeDate"
-          id="incomeDate"
-          title="date"
-          onChange={handleChangeIncomeDate}
-        />
-      </div>
-      <Button variant="contained" color="success" type="submit">
-        Add income
-      </Button>
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Grid item xs={6} md={3}>
+          <TextField
+            label="Income Source"
+            variant="outlined"
+            name="source"
+            id="source"
+            onChange={handleChange}
+          />
+        </Grid>
+        <Grid item xs={6} md={3}>
+          <TextField
+            label="Income Amount"
+            variant="outlined"
+            name="amount"
+            id="amount"
+            onChange={handleChange}
+          />
+        </Grid>
+        <Grid item xs={6} md={3}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker name="date" onChange={handleChangeDate} />
+          </LocalizationProvider>
+        </Grid>
+        <Grid item xs={6} md={3}>
+          <Button variant="contained" color="primary" type="submit">
+            Add income
+          </Button>
+        </Grid>
+      </Grid>
     </form>
   );
 }
