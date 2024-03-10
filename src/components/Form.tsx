@@ -1,10 +1,11 @@
+import { ChangeEvent, FormEvent } from "react";
+
 import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Dayjs } from "dayjs";
-import { ChangeEvent, FormEvent } from "react";
 
 type Input = {
   name: string;
@@ -54,7 +55,7 @@ export function Form({
         </Grid>
         <Grid item xs={6} md={3}>
           <Button variant="contained" color="primary" type="submit">
-            Add income
+            Add
           </Button>
         </Grid>
       </Grid>

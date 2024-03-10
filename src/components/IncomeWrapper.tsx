@@ -25,9 +25,13 @@ const INCOME_INPUTS = [
   },
 ];
 
-export function IncomeWrapper() {
+type IncomeWrapperProbs = {
+  incomes: Income[];
+  setIncomes: (key: Income[]) => void;
+};
+
+export function IncomeWrapper({ incomes, setIncomes }: IncomeWrapperProbs) {
   // states
-  const [incomes, setIncomes] = useState<Income[]>([]);
   const [income, setIncome] = useState<Income>({
     id: Number(new Date()),
     source: "",
@@ -47,7 +51,7 @@ export function IncomeWrapper() {
     if (value) {
       setIncome({
         ...income,
-        date: value.toDate().toLocaleTimeString(),
+        date: value.toDate().toLocaleDateString(),
       });
     }
   };
@@ -61,7 +65,6 @@ export function IncomeWrapper() {
       date: income.date,
     };
     setIncomes([...incomes, newIncome]);
-    console.log(incomes);
   };
 
   return (

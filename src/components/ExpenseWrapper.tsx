@@ -25,9 +25,13 @@ const EXPENSE_INPUTS = [
   },
 ];
 
-export function ExpenseWrapper() {
+type ExpenseWrapperProbs = {
+  expenses: Expense[];
+  setExpenses: (key: Expense[]) => void;
+};
+
+export function ExpenseWrapper({ expenses, setExpenses }: ExpenseWrapperProbs) {
   // states
-  const [expenses, setExpenses] = useState<Expense[]>([]);
   const [expense, setExpense] = useState<Expense>({
     id: Number(new Date()),
     source: "",
@@ -47,7 +51,7 @@ export function ExpenseWrapper() {
     if (value) {
       setExpense({
         ...expense,
-        date: value.toDate().toLocaleTimeString(),
+        date: value.toDate().toLocaleDateString(),
       });
     }
   };
@@ -61,7 +65,6 @@ export function ExpenseWrapper() {
       date: expense.date,
     };
     setExpenses([...expenses, newExpense]);
-    console.log(expenses);
   };
 
   return (
