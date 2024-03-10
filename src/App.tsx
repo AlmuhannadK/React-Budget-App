@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+
+import { Grid } from "@mui/material";
+
 import "./App.css";
 import { IncomeWrapper } from "./components/IncomeWrapper";
 import { ExpenseWrapper } from "./components/ExpenseWrapper";
-import { Grid } from "@mui/material";
+
 function App() {
   return (
     <div>
