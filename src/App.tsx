@@ -6,14 +6,14 @@ import "./App.css";
 import { Income, IncomeWrapper } from "./components/IncomeWrapper";
 import { Expense, ExpenseWrapper } from "./components/ExpenseWrapper";
 import { SavingWrapper } from "./components/SavingWrapper";
+import { TransferAmountWrapper } from "./components/TransferAmountWrapper";
 
 function App() {
   const [incomes, setIncomes] = useState<Income[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [savingsTarget, setSavingsTarget] = useState(0);
+  const [transferAmount, setTransferAmount] = useState(0);
 
-  console.log("savingsTarget: ", savingsTarget);
-  // calculate balance
   let totalIncome: number = 0;
   incomes.forEach((income) => {
     totalIncome += income.amount;
@@ -47,7 +47,12 @@ function App() {
           <SavingWrapper setSavingsTarget={setSavingsTarget} />
         </Grid>
       </Grid>
-      <Typography>Balance: {balance}</Typography>
+      <Grid container alignItems={"center"}>
+        <Grid item xs={12}>
+          <Typography marginBottom={2}>Current Balance: {balance}</Typography>
+          <TransferAmountWrapper setTransferAmount={setTransferAmount} />
+        </Grid>
+      </Grid>
     </div>
   );
 }

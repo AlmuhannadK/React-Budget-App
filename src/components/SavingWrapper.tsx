@@ -1,3 +1,5 @@
+import { ChangeEvent } from "react";
+
 import {
   Button,
   Grid,
@@ -6,7 +8,6 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { ChangeEvent, FormEvent } from "react";
 
 type SavingWrapperProbs = {
   setSavingsTarget: (key: number) => void;
@@ -47,7 +48,7 @@ export function SavingWrapper({ setSavingsTarget }: SavingWrapperProbs) {
                 60
               )}%`}</Typography>
             </Box>
-          </Box>{" "}
+          </Box>
         </Grid>
       </Grid>
     </form>
