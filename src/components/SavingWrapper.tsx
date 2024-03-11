@@ -25,6 +25,8 @@ export function SavingWrapper({
     setSavingsTarget(Number(value));
   };
 
+  const progress = (currentSaving / savingsTarget) * 100 || 0;
+
   return (
     <form>
       <Grid container>
@@ -49,11 +51,11 @@ export function SavingWrapper({
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Typography>Progress: </Typography>
             <Box sx={{ width: "40%", mr: 1 }}>
-              <LinearProgress variant="determinate" value={0} />
+              <LinearProgress variant="determinate" value={progress} />
             </Box>
             <Box sx={{ minWidth: 35 }}>
               <Typography variant="body2" color="text.secondary">{`${Math.round(
-                currentSaving / savingsTarget
+                progress
               )}%`}</Typography>
             </Box>
           </Box>
