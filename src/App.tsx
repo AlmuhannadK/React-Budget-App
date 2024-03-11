@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 import { Grid, Typography } from "@mui/material";
 
@@ -12,7 +12,9 @@ function App() {
   const [incomes, setIncomes] = useState<Income[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [savingsTarget, setSavingsTarget] = useState(0);
+  const [currentSaving, setCurrentSaving] = useState(0);
   const [transferAmount, setTransferAmount] = useState(0);
+  const [transferError, setTransferError] = useState("");
 
   let totalIncome: number = 0;
   incomes.forEach((income) => {
@@ -24,7 +26,21 @@ function App() {
     totalExpense += expense.amount;
   });
 
-  const balance: number = totalIncome - totalExpense;
+  const balance: number = totalIncome - totalExpense - currentSaving;
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (transferAmount <= balance) {
+      // some outcome, but guarantees recent state value --> setCurrentSaving(currentSaving + transferAmount);
+      setCurrentSaving((prevState: number) => {
+        return prevState + transferAmount;
+      });
+      setTransferError("");
+    } else {
+      setTransferError("Insufficient funds for transaction");
+    }
+    setTransferAmount(0);
+  };
 
   /*  More Advanced Method to Calculate Total with reduce()
   
@@ -44,13 +60,36 @@ function App() {
           <ExpenseWrapper expenses={expenses} setExpenses={setExpenses} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <SavingWrapper setSavingsTarget={setSavingsTarget} />
+          <SavingWrapper
+            setSavingsTarget={setSavingsTarget}
+            currentSaving={currentSaving}
+            savingsTarget={savingsTarget}
+          />
         </Grid>
       </Grid>
-      <Grid container alignItems={"center"}>
-        <Grid item xs={12}>
+      <Grid container marginTop={10}>
+        <Grid item xs={12} display={"flex"} justifyContent={"center"}>
           <Typography marginBottom={2}>Current Balance: {balance}</Typography>
-          <TransferAmountWrapper setTransferAmount={setTransferAmount} />
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
+          <TransferAmountWrapper
+            setTransferAmount={setTransferAmount}
+            handleSubmit={handleSubmit}
+            transferAmount={transferAmount}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          {transferError && (
+            <Typography color="error" textAlign={"center"}>
+              {transferError}
+            </Typography>
+          )}
         </Grid>
       </Grid>
     </div>

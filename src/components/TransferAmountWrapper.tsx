@@ -1,14 +1,17 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, FormEvent } from "react";
 
 import { Button, Grid, TextField } from "@mui/material";
-import { color } from "@mui/system";
 
 type TransferAmountProbs = {
   setTransferAmount: (key: number) => void;
+  handleSubmit: (key: FormEvent) => void;
+  transferAmount: number;
 };
 
 export function TransferAmountWrapper({
   setTransferAmount,
+  handleSubmit,
+  transferAmount,
 }: TransferAmountProbs) {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -16,8 +19,8 @@ export function TransferAmountWrapper({
   };
 
   return (
-    <form>
-      <Grid container>
+    <form onSubmit={handleSubmit}>
+      <Grid container justifyContent={"center"}>
         <Grid item xs={12} marginBottom={2}>
           <TextField
             label="Transfer to Saving"
@@ -25,12 +28,18 @@ export function TransferAmountWrapper({
             name="transfer"
             id="transfer"
             type="number"
+            value={transferAmount}
             onChange={handleChange}
           />
+          <Button
+            type="submit"
+            variant="contained"
+            color="success"
+            style={{ height: "100%" }}
+          >
+            Transfer
+          </Button>
         </Grid>
-        <Button type="reset" variant="contained" color="success">
-          Transfer
-        </Button>
       </Grid>
     </form>
   );
