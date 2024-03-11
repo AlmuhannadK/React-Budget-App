@@ -1,28 +1,30 @@
 import { useState } from "react";
 
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 import "./App.css";
 import { Income, IncomeWrapper } from "./components/IncomeWrapper";
 import { Expense, ExpenseWrapper } from "./components/ExpenseWrapper";
+import { SavingWrapper } from "./components/SavingWrapper";
 
 function App() {
-  // pass states as probs to components
   const [incomes, setIncomes] = useState<Income[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
+  const [savingsTarget, setSavingsTarget] = useState(0);
 
+  console.log("savingsTarget: ", savingsTarget);
   // calculate balance
   let totalIncome: number = 0;
   incomes.forEach((income) => {
     totalIncome += income.amount;
   });
-  console.log(totalIncome);
 
   let totalExpense: number = 0;
   expenses.forEach((expense) => {
     totalExpense += expense.amount;
   });
-  console.log(totalExpense);
+
+  const balance: number = totalIncome - totalExpense;
 
   /*  More Advanced Method to Calculate Total with reduce()
   
@@ -31,20 +33,21 @@ function App() {
   }, 0);
   */
 
-  const balance: number = totalIncome - totalExpense;
-
   return (
     <div>
       <h1>React - Budget App</h1>
       <Grid container>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={4}>
           <IncomeWrapper incomes={incomes} setIncomes={setIncomes} />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={4}>
           <ExpenseWrapper expenses={expenses} setExpenses={setExpenses} />
         </Grid>
+        <Grid item xs={12} md={4}>
+          <SavingWrapper setSavingsTarget={setSavingsTarget} />
+        </Grid>
       </Grid>
-      <h1>Balance: {balance}</h1>
+      <Typography>Balance: {balance}</Typography>
     </div>
   );
 }
