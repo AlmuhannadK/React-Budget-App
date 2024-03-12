@@ -31,7 +31,8 @@ function App() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (transferAmount <= balance) {
-      // some outcome, but guarantees recent state value --> setCurrentSaving(currentSaving + transferAmount);
+      // some outcome, but guarantees recent state value from setter
+      // --> setCurrentSaving(currentSaving + transferAmount);
       setCurrentSaving((prevState: number) => {
         return prevState + transferAmount;
       });
@@ -51,7 +52,9 @@ function App() {
 
   return (
     <div>
-      <h1>React - Budget App</h1>
+      <Typography variant="h1" textAlign={"center"} marginBlock={8}>
+        React - Budget App
+      </Typography>
       <Grid container>
         <Grid item xs={12} md={4}>
           <IncomeWrapper incomes={incomes} setIncomes={setIncomes} />
