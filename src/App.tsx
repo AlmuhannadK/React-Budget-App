@@ -43,12 +43,19 @@ function App() {
     setTransferAmount(0);
   };
 
-  /*  More Advanced Method to Calculate Total with reduce()
-  
-  const totalExpense = expenses.reduce((accumulator, currentValue) => {
-    return accumulator + currentValue.amount;
-  }, 0);
-  */
+  const handleDeleteIncome = (id: number) => {
+    const updatedIncomes = incomes.filter((income) => {
+      return income.id !== id;
+    });
+    setIncomes(updatedIncomes);
+  };
+
+  const handleDeleteExpense = (id: number) => {
+    const updatedExpenses = expenses.filter((expense) => {
+      return expense.id !== id;
+    });
+    setExpenses(updatedExpenses);
+  };
 
   return (
     <div>
@@ -57,10 +64,18 @@ function App() {
       </Typography>
       <Grid container>
         <Grid item xs={12} md={4}>
-          <IncomeWrapper incomes={incomes} setIncomes={setIncomes} />
+          <IncomeWrapper
+            incomes={incomes}
+            setIncomes={setIncomes}
+            handleDelete={handleDeleteIncome}
+          />
         </Grid>
         <Grid item xs={12} md={4}>
-          <ExpenseWrapper expenses={expenses} setExpenses={setExpenses} />
+          <ExpenseWrapper
+            expenses={expenses}
+            setExpenses={setExpenses}
+            handleDelete={handleDeleteExpense}
+          />
         </Grid>
         <Grid item xs={12} md={4}>
           <SavingWrapper
