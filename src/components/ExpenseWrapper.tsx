@@ -29,12 +29,14 @@ type ExpenseWrapperProbs = {
   expenses: Expense[];
   setExpenses: (key: Expense[]) => void;
   handleDelete: (key: number) => void;
+  addLabel: string;
 };
 
 export function ExpenseWrapper({
   expenses,
   setExpenses,
   handleDelete,
+  addLabel,
 }: ExpenseWrapperProbs) {
   // states
   const [expense, setExpense] = useState<Expense>({
@@ -79,6 +81,7 @@ export function ExpenseWrapper({
         handleChangeDate={handleChangeDate}
         handleSubmit={handleSubmit}
         inputs={EXPENSE_INPUTS}
+        addLabel={addLabel}
       />
 
       <ListItems items={expenses} handleDelete={handleDelete} />

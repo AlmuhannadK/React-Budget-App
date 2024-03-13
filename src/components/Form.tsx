@@ -18,6 +18,7 @@ type FormProps = {
   handleChangeDate: (value: Dayjs | null) => void;
   handleSubmit: (e: FormEvent) => void;
   inputs: Input[];
+  addLabel: string;
 };
 
 export function Form({
@@ -25,6 +26,7 @@ export function Form({
   handleChangeDate,
   handleSubmit,
   inputs,
+  addLabel,
 }: FormProps) {
   return (
     <form onSubmit={handleSubmit}>
@@ -55,7 +57,7 @@ export function Form({
         </Grid>
         <Grid item xs={6} md={3}>
           <Button variant="contained" color="primary" type="submit">
-            Add
+            {addLabel}
           </Button>
         </Grid>
       </Grid>

@@ -57,6 +57,9 @@ function App() {
     setExpenses(updatedExpenses);
   };
 
+  const addIncomeLabel = "Add Income";
+  const addExpenseLabel = "Add Expense";
+
   return (
     <div>
       <Typography variant="h1" textAlign={"center"} marginBlock={8}>
@@ -68,6 +71,7 @@ function App() {
             incomes={incomes}
             setIncomes={setIncomes}
             handleDelete={handleDeleteIncome}
+            addLabel={addIncomeLabel}
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -75,6 +79,7 @@ function App() {
             expenses={expenses}
             setExpenses={setExpenses}
             handleDelete={handleDeleteExpense}
+            addLabel={addExpenseLabel}
           />
         </Grid>
         <Grid item xs={12} md={4}>

@@ -29,12 +29,14 @@ type IncomeWrapperProbs = {
   incomes: Income[];
   setIncomes: (key: Income[]) => void;
   handleDelete: (key: number) => void;
+  addLabel: string;
 };
 
 export function IncomeWrapper({
   incomes,
   setIncomes,
   handleDelete,
+  addLabel,
 }: IncomeWrapperProbs) {
   // states
   const [income, setIncome] = useState<Income>({
@@ -79,6 +81,7 @@ export function IncomeWrapper({
         handleChangeDate={handleChangeDate}
         handleSubmit={handleSubmit}
         inputs={INCOME_INPUTS}
+        addLabel={addLabel}
       />
 
       <ListItems items={incomes} handleDelete={handleDelete} />
