@@ -1,9 +1,27 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+import { SubmitHandler, useForm, useFormState } from "react-hook-form";
 
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Dayjs } from "dayjs";
 
 import { Form } from "./Form";
 import { ListItems } from "./ListItems";
+import { Typography } from "@mui/material";
+
+const IncomeSchema = z.object({
+  source: z
+    .string()
+    .min(3, {
+      message: "please enter min 3 characters",
+    })
+    .max(25),
+  amount: z.number().positive({
+    message: "please enter valid numbers (greater than 0)",
+  }),
+  date: z.string(),
+});
+type IncomeSchemaType = z.infer<typeof IncomeSchema>;
 
 export type Income = {
   id: number;
@@ -14,11 +32,13 @@ export type Income = {
 
 const INCOME_INPUTS = [
   {
+    type: "text",
     name: "source",
     id: "source",
     label: "Income Source",
   },
   {
+    type: "number",
     name: "amount",
     id: "amount",
     label: "Income Amount",
@@ -39,50 +59,46 @@ export function IncomeWrapper({
   addLabel,
 }: IncomeWrapperProbs) {
   // states
-  const [income, setIncome] = useState<Income>({
-    id: Number(new Date()),
-    source: "",
-    amount: 0,
-    date: new Date().toLocaleDateString(),
-  });
+  // const [income, setIncome] = useState<Income>({
+  //   id: Number(new Date()),
+  //   source: "",
+  //   amount: 0,
+  //   date: new Date().toLocaleDateString(),
+  // });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target; //destructuring (take name and value form target)
-    setIncome({
-      ...income,
-      [name]: value, //dynamically assign value to name of field
-    });
-  };
+  //react hook form
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<IncomeSchemaType>({ resolver: zodResolver(IncomeSchema) });
 
-  const handleChangeDate = (value: Dayjs | null) => {
-    if (value) {
-      setIncome({
-        ...income,
-        date: value.toDate().toLocaleDateString(),
-      });
-    }
-  };
+  console.log("errors: ", errors);
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const newIncome: Income = {
-      id: Number(new Date()),
-      source: income.source,
-      amount: Number(income.amount),
-      date: income.date,
-    };
-    setIncomes([...incomes, newIncome]);
+  const onSubmit = (data: any) => {
+    setIncomes([...incomes, data]);
   };
 
   return (
     <>
       <Form
-        handleChange={handleChange}
-        handleChangeDate={handleChangeDate}
+        register={register}
         handleSubmit={handleSubmit}
+        onSubmit={onSubmit}
+        control={control}
         inputs={INCOME_INPUTS}
         addLabel={addLabel}
       />
+      {errors.source && (
+        <Typography color="red">{errors.source.message}</Typography>
+      )}
+      {errors.amount && (
+        <Typography color="red">{errors.amount.message}</Typography>
+      )}
+      {errors.date && (
+        <Typography color="red">{errors.date.message}</Typography>
+      )}
 
       <ListItems items={incomes} handleDelete={handleDelete} />
     </>
