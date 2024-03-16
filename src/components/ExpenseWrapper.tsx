@@ -1,7 +1,3 @@
-import { ChangeEvent, FormEvent, useState } from "react";
-
-import { Dayjs } from "dayjs";
-
 import { Form } from "./Form";
 import { ListItems } from "./ListItems";
 import { z } from "zod";
@@ -58,13 +54,6 @@ export function ExpenseWrapper({
   handleDelete,
   addLabel,
 }: ExpenseWrapperProbs) {
-  // states
-  // const [expense, setExpense] = useState<Expense>({
-  //   id: Number(new Date()),
-  //   source: "",
-  //   amount: 0,
-  //   date: new Date().toLocaleDateString(),
-  // });
   const {
     register,
     handleSubmit,
@@ -73,7 +62,6 @@ export function ExpenseWrapper({
   } = useForm<ExpenseSchemaType>({ resolver: zodResolver(ExpenseSchema) });
 
   const onSubmit = (value: any) => {
-    // need to add global state
     setExpenses([...expenses, value]);
   };
 

@@ -1,9 +1,7 @@
-import { ChangeEvent, FormEvent, useState } from "react";
-import { SubmitHandler, useForm, useFormState } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Dayjs } from "dayjs";
 
 import { Form } from "./Form";
 import { ListItems } from "./ListItems";
@@ -58,14 +56,6 @@ export function IncomeWrapper({
   handleDelete,
   addLabel,
 }: IncomeWrapperProbs) {
-  // states
-  // const [income, setIncome] = useState<Income>({
-  //   id: Number(new Date()),
-  //   source: "",
-  //   amount: 0,
-  //   date: new Date().toLocaleDateString(),
-  // });
-
   //react hook form
   const {
     register,

@@ -3,8 +3,6 @@ import { createContext, useContext, useState } from "react";
 
 import { Welcome } from "../pages/Welcome";
 import App from "../pages/App";
-import { Income } from "./IncomeWrapper";
-import { Expense } from "./ExpenseWrapper";
 
 export const BudgetContext = createContext<any>([]);
 
@@ -20,8 +18,6 @@ const router = createBrowserRouter([
 ]);
 // App entry point
 export function Router() {
-  //   const [incomes, setIncomes] = useState<Income[]>([]);
-  //   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [state, setState] = useState({
     incomes: [],
     expenses: [],
