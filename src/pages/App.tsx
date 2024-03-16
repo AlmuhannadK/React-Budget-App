@@ -1,12 +1,13 @@
 import { FormEvent, useState } from "react";
+import { Link } from "react-router-dom";
 
-import { Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 
 import "./App.css";
-import { Income, IncomeWrapper } from "./components/IncomeWrapper";
-import { Expense, ExpenseWrapper } from "./components/ExpenseWrapper";
-import { SavingWrapper } from "./components/SavingWrapper";
-import { TransferAmountWrapper } from "./components/TransferAmountWrapper";
+import { Income, IncomeWrapper } from "../components/IncomeWrapper";
+import { Expense, ExpenseWrapper } from "../components/ExpenseWrapper";
+import { SavingWrapper } from "../components/SavingWrapper";
+import { TransferAmountWrapper } from "../components/TransferAmountWrapper";
 
 function App() {
   const [incomes, setIncomes] = useState<Income[]>([]);
@@ -59,6 +60,7 @@ function App() {
 
   const addIncomeLabel = "Add Income";
   const addExpenseLabel = "Add Expense";
+  const routerButtonLabel = "Back";
 
   return (
     <div>
@@ -113,6 +115,13 @@ function App() {
               {transferError}
             </Typography>
           )}
+        </Grid>
+      </Grid>
+      <Grid container justifyContent={"center"} marginBlock={8}>
+        <Grid item>
+          <Button variant="contained" color="info">
+            <Link to={"/"}>{routerButtonLabel}</Link>
+          </Button>
         </Grid>
       </Grid>
     </div>

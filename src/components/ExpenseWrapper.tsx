@@ -72,8 +72,6 @@ export function ExpenseWrapper({
     formState: { errors },
   } = useForm<ExpenseSchemaType>({ resolver: zodResolver(ExpenseSchema) });
 
-  console.log("errors: ", errors);
-
   const onSubmit = (value: any) => {
     // need to add global state
     setExpenses([...expenses, value]);
